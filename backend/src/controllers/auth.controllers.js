@@ -75,14 +75,6 @@ export const register = async (req, res) => {
 
 
 export const login = async (req, res) => { 
-    // get email and password from the body
-    // check if user exists in db
-    // match the password and hashedPassword
-    // create jwt token again and store it in cookie
-
-    console.log("login controller is started");
-    
-
     const {email, password} = req.body;
 
     try {
