@@ -11,7 +11,8 @@ export const getAllSubmissions = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "All submissions are fetched successfully"
+            message: "All submissions are fetched successfully",
+            submission
         })
     } catch (error) {
         console.error("Fetch Submissions Error:", error);
@@ -19,7 +20,7 @@ export const getAllSubmissions = async (req, res) => {
     }
 
 }
-export const getSubissionForProblem = async (req, res) => {
+export const getSubmissionForProblem = async (req, res) => {
     try {
         const userId = req.user.id;
         const problemId = req.params.problemId;
