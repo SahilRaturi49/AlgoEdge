@@ -45,3 +45,13 @@ export const pollBatchResults = async (tokens) => {
 
     }
 }
+
+export function getLanguageName(LanguageId){
+    const LANGUAGE_NAMES = {
+        "PYTHON": 71,
+        "JAVA": 62,
+        "JAVASCRIPT": 63,
+    }
+
+    return LANGUAGE_NAMES[LanguageId] || "Unknown"
+}

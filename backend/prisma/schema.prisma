@@ -26,19 +26,18 @@ enum Difficulty {
 }
 
 model User {
-  id         String       @id @default(uuid())
-  name       String?
-  email      String       @unique
-  image      String?
-  role       UserRole     @default(USER)
-  password   String
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  image     String?
+  role      UserRole @default(USER)
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  problems   Problem[]
-  submission Submission[]
+  problems      Problem[]
+  submission    Submission[]
   problemSolved ProblemSolved[]
-
 }
 
 model Problem {
@@ -59,9 +58,9 @@ model Problem {
   updatedAt          DateTime   @updatedAt
 
   // Relationship
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   submissio Submission[]
-  solvedBy ProblemSolved[]
+  solvedBy  ProblemSolved[]
 }
 
 model Submission {
@@ -88,37 +87,35 @@ model Submission {
 }
 
 model TestCaseResult {
-  id String @id @default(uuid())
-  submissionId String
-  testCase Int
-  passed Boolean 
-  stdout String?
-  expected String?
-  stderr String?
+  id            String  @id @default(uuid())
+  submissionId  String
+  testCase      Int
+  passed        Boolean
+  stdout        String?
+  expected      String?
+  stderr        String?
   compileOutput String?
-  status String
-  memory String?
-  time String?
+  status        String
+  memory        String?
+  time          String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  Submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@index([submissionId])
 }
 
-
 model ProblemSolved {
-  id String @id @default(uuid())
-  userId String
-  problemId String 
+  id        String   @id @default(uuid())
+  userId    String
+  problemId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([userId, problemId])
 }
-
