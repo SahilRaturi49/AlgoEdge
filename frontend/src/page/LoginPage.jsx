@@ -13,7 +13,7 @@ import {
 
 import { z } from "zod";
 import AuthImagePattern from '../components/AuthImagePattern';
-// import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 const LoginSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -23,9 +23,9 @@ const LoginSchema = z.object({
 const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(true);
+  // const [isSignUp, setIsSignUp] = useState(true);
 
-  // const {signup , isSigninUp} = useAuthStore()
+  const {isLoggingIn , login} = useAuthStore()
 
   const {
     register,
@@ -37,10 +37,10 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      await signup(data)
-      console.log("signup data", data)
+      await login(data)
+      
     } catch (error) {
-      console.error("SignUp failed:", error);
+      console.error("Signup failed:", error);
     }
   }
 
@@ -124,17 +124,17 @@ const LoginPage = () => {
             <button
               type="submit"
               className="btn btn-primary w-full"
-            //  disabled={isSigninUp}
+             disabled={isLoggingIn}
             >
-               {/* {isSigninUp ? (
+               {isLoggingIn ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
                   Loading...
                 </>
               ) : (
                 "Sign in"
-              )} */}
-              Login
+              )}
+              
             </button>
           </form>
 
