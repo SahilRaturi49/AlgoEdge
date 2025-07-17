@@ -7,6 +7,7 @@ import LoginPage from './page/LoginPage';
 import SignUpPage from './page/SignUpPage';
 import { useAuthStore } from './store/useAuthStore';
 import { Loader } from 'lucide-react';
+import Layout from './layout/Layout';
 
 
 
@@ -31,10 +32,12 @@ const App = () => {
       <Toaster />
 
       <Routes>
-        <Route
-          path='/'
+        <Route path='/' element={<Layout />}>
+          <Route
+          index
           element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
         />
+        </Route>
 
         <Route
           path='/login'
