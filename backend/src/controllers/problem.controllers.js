@@ -8,12 +8,12 @@ export const createProblem = async (req, res) => {
         return res.status(403).json({
             error: "You are not authorized to create a problem"
         });
-    };
+    }
+
     try {
+        // ✅ Validate all reference solutions first
         for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
             const languageId = getJudge0LanguageId(language);
-            console.log(languageId);
-
 
             if (!languageId) {
                 return res.status(400).json({
@@ -26,57 +26,52 @@ export const createProblem = async (req, res) => {
                 language_id: languageId,
                 stdin: input,
                 expected_output: output,
-            }))
+            }));
 
             const submissionResults = await submitBatch(submissions);
-
             const tokens = submissionResults.map((res) => res.token);
-
             const results = await pollBatchResults(tokens);
 
             for (let i = 0; i < results.length; i++) {
                 const result = results[i];
-
-                console.log("Result--------", result);
-
 
                 if (result.status.id !== 3) {
                     return res.status(400).json({
                         error: `Testcase ${i + 1} failed for language ${language}`
                     });
                 }
-
             }
-
-            const newProblem = await db.problem.create({
-                data: {
-                    title,
-                    description,
-                    difficulty,
-                    tags,
-                    examples,
-                    constraints,
-                    testcases,
-                    codeSnippets,
-                    referenceSolutions,
-                    userId: req.user.id
-                }
-            });
-
-            return res.status(201).json({
-                success: true,
-                message: "Problem created successfully",
-                problem: newProblem
-            });
         }
+
+        // ✅ Create the problem only after all validations passed
+        const newProblem = await db.problem.create({
+            data: {
+                title,
+                description,
+                difficulty,
+                tags,
+                examples,
+                constraints,
+                testcases,
+                codeSnippets,
+                referenceSolutions,
+                userId: req.user.id
+            }
+        });
+
+        return res.status(201).json({
+            success: true,
+            message: "Problem created successfully",
+            problem: newProblem
+        });
+
     } catch (error) {
         console.log(error);
         return res.status(500).json({
             error: "Error while creating problem",
         });
     }
-
-}
+};
 
 
 export const getAllProblems = async (req, res) => {
