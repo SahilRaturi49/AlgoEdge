@@ -19,8 +19,17 @@ export const createPlaylist = async (req, res) => {
             playlist
         })
     } catch (error) {
-        console.error("Error creating playlist:", error);
-        res.status(500).json({ error: "Failed to create playlist" });
+        // console.error("Error creating playlist:", error);
+        // res.status(500).json({ error: "Failed to create playlist" });
+         if (error.code === 'P2002') {
+        return res.status(400).json({
+            success: false,
+            error: "A playlist with this name already exists.",
+        });
+    }
+
+    console.error("Error creating playlist:", error);
+    res.status(500).json({ error: "Failed to create playlist" });
     }
 
 }
@@ -36,7 +45,7 @@ export const getAllListDetails = async (req, res) => {
             include: {
                 problems: {
                     include: {
-                        problem: true,
+                        Problem: true,
                     },
                 },
             },
