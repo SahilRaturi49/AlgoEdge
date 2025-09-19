@@ -1,5 +1,24 @@
 {
   "scripts": {
     "start": "node backend/index.js"
+  },
+  "name": "algoedge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SahilRaturi49/AlgoEdge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SahilRaturi49/AlgoEdge/issues"
+  },
+  "homepage": "https://github.com/SahilRaturi49/AlgoEdge#readme",
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
