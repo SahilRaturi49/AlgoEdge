@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/SahilRaturi49/AlgoEdge#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "dotenv": "^16.6.1"
   }
 }
