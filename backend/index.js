@@ -4,18 +4,19 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 const app = express();
-app.use(
-  cors({
-    origin: "https://algo-edge.vercel.app",
-    credentials: true,
-  })
-);
+
 dotenv.config({
   path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
 });
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "https://algo-edge.vercel.app",
+    credentials: true,
+  })
+);
 
 const PORT = process.env.PORT || 8000;
 
