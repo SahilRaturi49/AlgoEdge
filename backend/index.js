@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://algo-edge.vercel.app/"],
+    origin: "https://algo-edge.vercel.app",
     credentials: true,
   })
 );
