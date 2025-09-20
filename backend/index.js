@@ -3,14 +3,10 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-if (process.env.NODE_ENV === "production") {
-  dotenv.config({ path: ".env.production" });
-} else {
-  dotenv.config({ path: ".env" });
-}
-
 const app = express();
-dotenv.config();
+dotenv.config({
+  path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
+});
 
 app.use(express.json());
 app.use(cookieParser());
