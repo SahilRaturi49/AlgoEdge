@@ -9,14 +9,15 @@ dotenv.config({
   path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
 });
 
-app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
     origin: "https://algo-edge.vercel.app",
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 8000;
 
