@@ -15,6 +15,8 @@ const app = express();
 //   })
 // );
 
+console.log("FRONTEND_ORIGINS env variable:", process.env.FRONTEND_ORIGINS);
+
 const allowedOrigins = process.env.FRONTEND_ORIGINS
   ? process.env.FRONTEND_ORIGINS.split(",")
   : ["http://localhost:5173", "https://algo-edge.vercel.app"];
