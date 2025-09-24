@@ -5,9 +5,7 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-dotenv.config({
-  path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
-});
+dotenv.config({});
 
 // app.use(
 //   cors({
