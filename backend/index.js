@@ -17,7 +17,7 @@ const app = express();
 
 const allowedOrigins = process.env.FRONTEND_ORIGINS
   ? process.env.FRONTEND_ORIGINS.split(",")
-  : ["http://localhost:5173"];
+  : ["http://localhost:5173", "https://algo-edge.vercel.app"];
 app.use(
   cors({
     origin: function (origin, callback) {
