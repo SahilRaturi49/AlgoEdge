@@ -16,7 +16,9 @@ dotenv.config({});
 //   })
 // );
 
-const allowedOrigins = process.env.FRONTEND_ORIGINS.split(",");
+const allowedOrigins = process.env.FRONTEND_ORIGINS
+  ? process.env.FRONTEND_ORIGINS.split(",")
+  : ["http://localhost:5173"];
 app.use(
   cors({
     origin: function (origin, callback) {
